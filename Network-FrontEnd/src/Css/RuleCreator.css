@@ -1,0 +1,264 @@
+.rule-creator-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  max-width: 90%;
+  max-height: 90vh;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: #f5f7fa;
+  border-bottom: 1px solid #e1e5eb;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #2d3748;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #718096;
+  padding: 0;
+}
+
+.close-button:hover {
+  color: #2d3748;
+}
+
+.modal-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.hierarchy-view {
+  flex: 1;
+  padding: 20px;
+  border-right: 1px solid #e1e5eb;
+  overflow-y: auto;
+}
+
+.hierarchy-view h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #4a5568;
+  font-size: 16px;
+}
+
+.hierarchy-tree {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hierarchy-item {
+  margin-bottom: 5px;
+}
+
+.hierarchy-header {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.hierarchy-header:hover {
+  background-color: #edf2f7;
+}
+
+.expand-icon {
+  margin-right: 8px;
+  font-size: 12px;
+  color: #718096;
+  width: 16px;
+  text-align: center;
+}
+
+.location-name {
+  flex: 1;
+  padding: 4px 0;
+  color: #2d3748;
+}
+
+.location-name:hover {
+  color: #4299e1;
+}
+
+.location-name.active {
+  color: #3182ce;
+  font-weight: 600;
+}
+
+.children-container {
+  margin-left: 24px;
+  border-left: 1px dashed #cbd5e0;
+  padding-left: 12px;
+}
+
+.level-0 {
+  font-weight: 500;
+}
+
+.level-1 {
+  font-weight: 400;
+}
+
+.level-2 {
+  font-weight: 300;
+}
+
+.rule-form-container {
+  flex: 2;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.rule-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 8px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4299e1;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.rule-preview {
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.rule-preview h5 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #4a5568;
+  font-size: 15px;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 16px;
+}
+
+.preview-row {
+  display: contents;
+}
+
+.preview-label {
+  font-weight: 500;
+  color: #4a5568;
+  font-size: 14px;
+}
+
+.preview-value {
+  color: #2d3748;
+  font-size: 14px;
+  word-break: break-word;
+}
+
+.create-button {
+  margin-top: 16px;
+  padding: 10px 16px;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.create-button:hover {
+  background-color: #2b6cb0;
+}
+
+.create-button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  padding: 20px;
+  text-align: center;
+  color: #718096;
+}
+/* Add these styles to your existing CSS */
+.firewall-selection {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+.firewall-selection h4 {
+  margin-bottom: 10px;
+}
+
+.firewall-select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.no-results {
+  padding: 15px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}

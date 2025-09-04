@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Upload</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        background-image: url("https://martech.org/wp-content/uploads/2015/12/computer-network-laptops2-ss-1920.jpg");
+        background-size: cover;
+        background-position: center;
+      }
+ 
+      .navbar-brand {
+        font-size: 2.0em;
+        color: #ffffff !important;
+      }
+ 
+      .navbar {
+        background-color: rgba(0, 123, 255, 0.9);
+      }
+ 
+      .container {
+        margin-top: 0px;
+        text-align: center;
+        color: #fff;
+      }
+ 
+      .upload-container {
+        background-color: #fff;
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        width: 60%;
+        max-width: 500px;
+        text-align: center;
+        padding: 20px;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+ 
+      .upload-container:hover {
+        background-color: #f0f0f0;
+      }
+ 
+      .upload-container h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+ 
+      .upload-container p {
+        margin: 10px 0;
+      }
+ 
+      .upload-container input[type="file"] {
+        display: none;
+      }
+ 
+      .upload-container label {
+        display: block;
+        cursor: pointer;
+        color: #007bff;
+        text-decoration: underline;
+      }
+ 
+      .upload-container .icon {
+        font-size: 2.5em;
+        color: #007bff;
+        margin-bottom: 10px;
+      }
+ 
+      .upload-container .file-type {
+        font-size: 1.2em;
+        margin-bottom: 20px;
+      }
+ 
+      .upload-container .status {
+        color: #6c757d;
+      }
+ 
+      .upload-container .uploaded {
+        color: #28a745;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+ 
+      .upload-container .uploading {
+        color: #ffc107;
+        animation: pulse 1s infinite;
+      }
+ 
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+ 
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+ 
+      .drop-zone {
+        border: 2px dashed #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 10px;
+        text-align: center;
+        color: #007bff;
+        cursor: pointer;
+      }
+ 
+      .drop-zone.hover {
+        background-color: #f0f0f0;
+      }
+ 
+      .file-name {
+        margin-top: 10px;
+        font-size: 0.9em;
+        color: #6c757d;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">Network Operations Intelligence</a>
+ 
+        <div class="dropdown ml-auto">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{% url 'home' %}">Compare</a>
+            <a class="dropdown-item" href="{% url 'home_check' %}">Generate</a>
+            <a class="dropdown-item" href="{% url 'firewall' %}">Firewall</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+ 
+ 
+    <h1 style="color: white; text-align: center; padding: 10px 20px;font-size:1.5em; background-color: rgb(0,0,0,0.7); border-radius: 5px; margin-top: 120px;">
+      Welcome! You can upload your Host File and Commands File to Execute commands and generate Files.
+    </h1>
+    <div class="upload-container">
+      <h2>GENERATE FILES</h2>
+      <p>Select the type of file you want to upload:</p>
+      <form method="POST" enctype="multipart/form-data" onsubmit="showProcessingModal(event)">
+        {% csrf_token %}
+        <div class="file-upload">
+          <input type="file" id="precheck" name="file1" onchange="handleFileUpload('status-precheck')" />
+          <label for="precheck" class="drop-zone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'precheck')">
+            <div class="icon"><i class="fa fa-file-alt"></i></div>
+            <div class="file-type">Host File</div>
+            <div class="status" id="status-precheck">Drag and drop the file or click</div>
+            <div class="file-name" id="filename-precheck"></div>
+          </label>
+        </div>
+        <div class="file-upload">
+          <input type="file" id="commands" name="file2" onchange="handleFileUpload('status-commands')" />
+          <label for="commands" class="drop-zone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'commands')">
+            <div class="icon"><i class="fa fa-file-alt"></i></div>
+            <div class="file-type">Commands File</div>
+            <div class="status" id="status-commands">Drag and drop the file or click</div>
+            <div class="file-name" id="filename-commands"></div>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3" id="uploadButton" disabled>Generate</button>
+      </form>
+    </div>
+ 
+    <!-- Processing Modal -->
+    <div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-labelledby="processingModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only">Generating...</span>
+            </div>
+            <p class="mt-3">Generating your files, please wait...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Current Content Modal -->
+    <div class="modal fade" id="currentContentModal" tabindex="-1" role="dialog" aria-labelledby="currentContentModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="currentContentModalLabel">Current Content</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="currentContent">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+ 
+    <script>
+       function handleFileUpload(statusId) {
+        const statusElement = document.getElementById(statusId);
+        const fileInput = document.getElementById(statusId.split('-')[1]);
+        const fileNameElement = document.getElementById(`filename-${statusId.split('-')[1]}`);
+ 
+        const file = fileInput.files[0];
+        const ext = file.name.substring(file.name.length - 4, file.name.length);
+        if (ext !== ".txt") {
+          alert(file.name+" file is not in .txt format");
+          allFilesSelected=false;
+         
+        }
+        else{
+          fileNameElement.textContent = file.name;
+ 
+          statusElement.classList.remove("uploaded");
+          statusElement.classList.add("uploading");
+          statusElement.innerHTML =
+            '<i class="fa fa-spinner fa-spin"></i> Uploading...';
+ 
+          setTimeout(() => {
+            statusElement.classList.remove("uploading");
+            statusElement.classList.add("uploaded");
+            statusElement.innerHTML =
+              '<i class="fa fa-check-circle"></i> File uploaded successfully!';
+ 
+            checkFileInputs(); // Check inputs after successful upload
+          }, 1500);
+        }
+      }
+ 
+      function showProcessingModal(event) {
+        event.preventDefault();
+        $('#processingModal').modal('show');
+        function showProcessingModal(event) {
+      event.preventDefault();
+      $('#processingModal').modal('show');
+ 
+      // Simulate processing delay (replace with actual processing logic)
+      setTimeout(() => {
+        $('#processingModal').modal('hide');
+        document.getElementById('uploadForm').reset(); // Reset form
+        document.getElementById('uploadButton').setAttribute('disabled', 'disabled'); // Disable button after form reset
+      }, 3000); // Adjust timeout as per actual processing time
+ 
+      // Perform form submit asynchronously (simulating AJAX submit)
+      setTimeout(() => {
+        event.target.submit();
+      }, 1000); // Adjust timeout as per actual processing time
+    }
+ 
+        // Simulate form submission
+        const form = event.target;
+        const formData = new FormData(form);
+       
+        // Submit form data asynchronously using fetch
+        fetch(form.action, {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => {
+          if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  const contentType = response.headers.get('Content-Type');
+  if (contentType && contentType.toLowerCase().includes('application/zip')) {
+    return response.blob();
+  } else {
+    throw new Error('Response is not a ZIP file');
+  }
+})
+.then(blob => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = 'reports.zip';
+          document.body.appendChild(a);
+          if(blob.size>0){
+          a.click();
+          }
+          window.URL.revokeObjectURL(url);
+ 
+          // Redirect to home_check after download
+          window.location.href = "{% url 'home_check' %}";
+        })
+        .catch(error => {
+          console.error('There was an error with the fetch operation:', error);
+          // Handle errors here
+        });
+ 
+ 
+      }
+ 
+      function handleDragOver(event) {
+        event.preventDefault();
+        event.currentTarget.classList.add("hover");
+      }
+ 
+      function handleDragLeave(event) {
+        event.preventDefault();
+        event.currentTarget.classList.remove("hover");
+      }
+ 
+      function handleDrop(event, inputId) {
+        event.preventDefault();
+        const files = event.dataTransfer.files;
+        const fileInput = document.getElementById(inputId);
+        fileInput.files = files;
+        handleFileUpload(`status-${inputId}`);
+        event.currentTarget.classList.remove("hover");
+      }
+ 
+      function checkFileInputs() {
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        let allFilesSelected = true;
+        let emptyFileDetected = false;
+   
+        fileInputs.forEach(input => {
+          const file = input.files[0];
+
+        const ext = file.name.substring(file.name.length - 4, file.name.length);
+        if (ext !== ".txt") {
+          alert(file.name+" file is not in .txt format.");
+          allFilesSelected=false;
+        }
+
+            if (input.files.length === 0) {
+                allFilesSelected = false;
+            } else {
+                 // Assuming only one file is selected per input
+                if (file.size === 0) {
+                    emptyFileDetected = true;
+                }
+            }
+        });
+   
+        const uploadButton = document.getElementById('uploadButton');
+   
+        if (emptyFileDetected) {
+            alert('At least one selected file is empty.');
+            uploadButton.setAttribute('disabled', 'disabled');
+        } else if (allFilesSelected) {
+            const reader = new FileReader();
+            const file = fileInputs[0].files[0]; // Assuming you're reading the first file input
+            reader.onload = function(e) {
+                const contents = e.target.result;
+                console.log(contents); // Log the contents to see what's being read
+                var lines = contents.split('\n');
+                var flagList = [];
+   
+                for (var i = 0; i < lines.length; i++) {
+                  if(lines[i].trim()==""){
+                    continue;
+                  }
+                    var elements = lines[i].trim().split(',');
+                    if (elements.length !== 3) {
+                        flagList.push(i + 1); // Pushing line numbers (1-based index)
+                    }
+                }
+   
+                if (flagList.length > 0) {
+                    var confirmation = confirm("There is invalid input format in lines: "+flagList+" in "+file.name+"\nDo you want to continue?");
+
+                    if (confirmation) {
+                      uploadButton.removeAttribute('disabled');
+                      // Disable button after form reset
+
+                      uploadButton.click();
+                        // console.log("Continuing with the current page");
+                        // Continue with your logic here
+                    } else {
+                        location.reload(); // Reload the page
+                    }
+                }
+                // Enable the upload button if disabled
+                uploadButton.removeAttribute('disabled');
+            };
+   
+            reader.readAsText(file);
+        }
+    }
+   
+      document.addEventListener('DOMContentLoaded', () => {
+        checkFileInputs();
+      });
+      function fetchCurrentContent() {
+  fetch('http://127.0.0.1:8000/get-current-content/')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.text();
+    })
+    .then(data => {
+       if (data.trim() === "end") {
+        fetch('http://127.0.0.1:8000/Deviceupdate/')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then(data => {
+            alert(data);
+            window.location.href = "{% url 'home_check' %}";
+          })
+          .catch(error => console.error('Error fetching Deviceupdate:', error));
+      } else {
+        // Handle other responses or data processing here
+      }
+    })
+    .catch(error => console.error('Error fetching current content:', error));
+}
+ 
+// Poll for current content every 5 seconds
+setInterval(fetchCurrentContent, 500); // Poll every 5 seconds (changed from 500ms)
+ 
+    </script>
+  </body>
+</html>

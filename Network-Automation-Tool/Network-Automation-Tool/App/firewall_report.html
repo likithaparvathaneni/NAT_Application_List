@@ -1,0 +1,60 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Firewall Rules Report</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+            body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
+            .container { margin-top: 50px; }
+            .report-title { text-align: center; margin-bottom: 30px; }
+            .passed-inputs { margin-bottom: 30px; padding: 20px; background-color: #e9ecef; border-radius: 5px; }
+            .table-container { display: flex; justify-content: center; margin-bottom: 30px; }
+            table { width: 100%; max-width: 800px; border-collapse: collapse; text-align: left; }
+            .table thead { background-color: #343a40; color: #fff; }
+            .table tbody tr:nth-child(even) { background-color: #f2f2f2; }
+            .table tbody tr.status-allow { background-color: #d4edda; color: #155724; }
+            .table tbody tr.status-deny { background-color: #f8d7da; color: #721c24; }
+            .rule-details { white-space: pre-wrap; word-break: break-word; }
+            .close-button { display: flex; justify-content: center; margin-top: 30px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2 class="report-title">Firewall Rules Report</h2>
+            <div class="passed-inputs">
+                <h5>Passed Inputs</h5>
+                <p><strong>Source:</strong> 100.64.0.18</p>
+                <p><strong>Destination:</strong> 1.1.1.1</p>
+                <p><strong>Source Zone:</strong> 100.64.0.18</p>
+                <p><strong>Destination Zone:</strong> 1.1.1.1</p>
+                <p><strong>Protocol:</strong> tcp</p>
+                <p><strong>Port:</strong> 1.1.1.1</p>
+            </div>
+            <div class="table-container">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Firewall Name</th>
+                            <th>Rule</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        <tr>
+                            <td colspan="3" class="text-center">No rules found.</td>
+                        </tr>
+        
+                    </tbody>
+                </table>
+            </div>
+            <div class="close-button">
+                <button class="btn btn-danger" onclick="window.close();">Close Window</button>
+            </div>
+        </div>
+    </body>
+    </html>
+    

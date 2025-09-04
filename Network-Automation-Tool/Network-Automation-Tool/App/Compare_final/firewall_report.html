@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firewall Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .status-allowed {
+            color: green;
+        }
+        .status-deny {
+            color: red;
+        }
+        .input-section {
+            margin-bottom: 20px;
+        }
+        .input-section label {
+            font-weight: bold;
+        }
+        .rule-lines {
+            text-align: left;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Firewall Report</h1>
+
+        <!-- User Inputs Section -->
+        <div class="input-section">
+            <h2>User Inputs</h2>
+            <p><strong>Source IP:</strong> 192.168.1.1</p>
+            <p><strong>Destination IP:</strong> 192.168.2.1</p>
+            <p><strong>Source Zone:</strong> internal</p>
+            <p><strong>Destination Zone:</strong> external</p>
+            <p><strong>Protocol:</strong> TCP</p>
+            <p><strong>Port:</strong> 80</p>
+        </div>
+
+        <!-- Firewall Report Section -->
+        <h2>Firewall Rules</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Firewall Name</th>
+                    <th>Rule Lines</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>Firewall1</td>
+                    <td class="rule-lines">"Global_BGP<br>index: 1" {<br>from Fromzone<br>source 1.1.1.1/23<br>source-region none<br>to ToZone<br>destination 2.2.2.2/28<br>destination-region none<br>user any<br>source-device any<br>destination-device any<br>category any<br>application/service [0:bgp/tcp/any/179 1:bgp/udp/any/179 2:ping/icmp/any/any ]<br>action allow<br>icmp-unreachable: no<br>terminal yes<br>}</td>
+                    <td class="status-allowed">Allowed</td>
+                </tr>
+    
+                <tr>
+                    <td>Firewall2</td>
+                    <td class="rule-lines">"Global_BGP<br>index: 1" {<br>from Fromzone<br>source 1.1.1.1/23<br>source-region none<br>to ToZone<br>destination 2.2.2.2/28<br>destination-region none<br>user any<br>source-device any<br>destination-device any<br>category any<br>application/service [0:bgp/tcp/any/179 1:bgp/udp/any/179 2:ping/icmp/any/any ]<br>action allow<br>icmp-unreachable: no<br>terminal yes<br>}</td>
+                    <td class="status-deny">Deny</td>
+                </tr>
+    
+                <tr>
+                    <td>Firewall3</td>
+                    <td class="rule-lines">"Global_BGP<br>index: 1" {<br>from Fromzone<br>source 1.1.1.1/23<br>source-region none<br>to ToZone<br>destination 2.2.2.2/28<br>destination-region none<br>user any<br>source-device any<br>destination-device any<br>category any<br>application/service [0:bgp/tcp/any/179 1:bgp/udp/any/179 2:ping/icmp/any/any ]<br>action allow<br>icmp-unreachable: no<br>terminal yes<br>}</td>
+                    <td class="status-allowed">Allowed</td>
+                </tr>
+    
+                <tr>
+                    <td>Firewall4</td>
+                    <td class="rule-lines">"Global_BGP<br>index: 1" {<br>from Fromzone<br>source 1.1.1.1/23<br>source-region none<br>to ToZone<br>destination 2.2.2.2/28<br>destination-region none<br>user any<br>source-device any<br>destination-device any<br>category any<br>application/service [0:bgp/tcp/any/179 1:bgp/udp/any/179 2:ping/icmp/any/any ]<br>action allow<br>icmp-unreachable: no<br>terminal yes<br>}</td>
+                    <td class="status-deny">Deny</td>
+                </tr>
+    
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

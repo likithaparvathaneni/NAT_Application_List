@@ -1,0 +1,146 @@
+.firewall-container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  table {
+    width: 80%; /* Adjust the width as needed */
+    border-collapse: collapse;
+    margin: 0 auto; /* Center the table */
+  }
+  
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center; /* Center the text */
+  }
+  
+  th {
+    background-color: #f4f4f4;
+  }
+  
+  strong {
+    font-weight: bold;
+  }
+  .required {
+    color: red;
+    margin-left: 5px;
+  }
+  .error-message {
+    color: red;
+    display: block;
+  }
+  .success {
+    color: green;
+    display: block;
+  }
+  .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.rule-creator-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.hierarchy-view {
+  margin: 20px 0;
+}
+
+.hierarchy-view ul {
+  list-style: none;
+  padding: 0;
+}
+
+.hierarchy-view li {
+  margin: 10px 0;
+}
+
+.hierarchy-view button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.rule-form {
+  margin-top: 10px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.rule-preview {
+  background: #e9f7fe;
+  padding: 15px;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.no-rules-found {
+  text-align: center;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.no-rules-found button {
+  margin-top: 15px;
+}

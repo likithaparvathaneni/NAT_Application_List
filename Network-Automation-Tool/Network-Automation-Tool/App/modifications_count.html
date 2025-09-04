@@ -1,0 +1,26 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifications Count</title>
+    <style>
+        .btn { padding: 10px 20px; margin: 5px; border: none; cursor: pointer; }
+        .btn-add { background-color: green; color: white; }
+        .btn-change { background-color: yellow; color: black; }
+        .btn-remove { background-color: red; color: white; }
+    </style>
+</head>
+<body>
+    <h1>Modifications Count</h1>
+    <button class="btn btn-add" onclick="openFilteredHtml('add')">Add</button>
+    <button class="btn btn-change" onclick="openFilteredHtml('change')">Change</button>
+    <button class="btn btn-remove" onclick="openFilteredHtml('remove')">Remove</button>
+
+    <script>
+        function openFilteredHtml(modification) {
+            var url = 'path/to/your/folder/filtered_' + modification + '_modifications.html';
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>

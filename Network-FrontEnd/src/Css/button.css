@@ -1,0 +1,105 @@
+.glass-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: #002f65; /* semi-transparent background */
+    border: none;
+    border-radius: 8px;
+    color: rgb(130, 141, 165);
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(8px); /* blur effect */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: block;
+  }
+  
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.4); /* On hover, make background slightly less transparent */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px); /* Slight lift effect */
+    text-decoration: none;
+    color: rgb(16, 220, 50);
+  }
+  
+  .glass-button:active {
+    transform: translateY(1px); /* Slight push effect when clicked */
+  }
+
+/* button.css */
+.glass-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: #002f65; /* semi-transparent background *//* Semi-transparent background */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(8px); /* Blur effect */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin: 10px; /* Adds space between buttons */
+  }
+  
+  .glass-button:hover {
+    background: rgba(255, 255, 255, 0.4); /* On hover, make background less transparent */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px); /* Lift effect on hover */
+  }
+  
+  .glass-button:active {
+    transform: translateY(1px); /* Push effect on click */
+  }
+  
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px; /* Adjust according to navbar height */
+  }
+/* button.css */
+.glass-button {
+    padding: 20px 40px; /* Larger padding for better clickability */
+    font-size: 18px;
+    background: linear-gradient(to right, #002f65, #60bfd4); /* semi-transparent background *//* Semi-transparent background */
+    border: none;
+    border-radius: 12px; /* Slightly larger border radius */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    backdrop-filter: blur(8px); /* Blur effect */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin: 10px 0; /* Add top and bottom margin to separate buttons */
+    width: 250px; /* Fixed width for consistency */
+    text-align: center; /* Center text in the button */
+  }
+  
+  .glass-button:hover {
+    background: whitesmoke; ; /* On hover, make background slightly less transparent */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-3px); /* Lift effect on hover */
+  }
+  
+  .glass-button:active {
+    transform: translateY(1px); /* Push effect on click */
+  }
+  
+  .home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between the buttons */
+    height: 100vh; /* Full viewport height */
+    text-align: center;
+    margin-top: -50px; /* Slight adjustment to account for navbar */
+  }
+  
+  .home-container h1 {
+    margin-bottom: 40px;
+    color: white;
+    font-size: 28px;
+  }
+    
+  

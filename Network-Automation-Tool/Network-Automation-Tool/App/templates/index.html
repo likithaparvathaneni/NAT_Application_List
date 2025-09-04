@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("bckg.png");
+            background-size: cover;
+            background-position: center;
+            background-image: url("https://www.cisco.com/content/dam/cisco-cdc/site/images/heroes/homepage/homepage-hero-ai-2-3200x1066.jpg");
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .navbar-brand {
+            font-size: 2.0em;
+            color: #ffffff !important;
+          }
+   
+        .navbar {
+        background-color: rgba(0, 123, 255, 0.9);
+        }
+        .container {
+            text-align: center;
+        }
+        .btn-primary{
+            height:40px;
+            width: 300px; /* Adjust button width as needed */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">Network Operations Intelligence</a>
+ 
+        <div class="dropdown ml-auto">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="{% url 'home' %}" onclick="reloadCurrentPage()">Compare</a>
+            <a class="dropdown-item" href="{% url 'home_check' %}">Generate</a>
+            <a class="dropdown-item" href="{% url 'firewall' %}">Firewall</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+ 
+ 
+    <div class="container mt-5">
+        <h1 style="color: bisque;">Welcome!</h1>
+        <div class="mt-3">
+            <a href="{% url 'home_check' %}" class="btn btn-primary btn-lg mr-2">Generate Files</a>
+        </div>
+        <div class="mt-3">
+            <a href="{% url 'home' %}" class="btn btn-primary btn-lg mr-2">Generate Comparision Report</a>
+        </div>
+        <div class="mt-3">
+            <a href="{% url 'firewall' %}" class="btn btn-primary btn-lg mr-2">Check Firewall Rule</a>
+        </div>
+    </div>
+ 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

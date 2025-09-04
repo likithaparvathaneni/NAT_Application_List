@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firewall Matches</title>
+</head>
+<body>
+    <h1>Matched Firewalls</h1>
+    {% if ips %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Firewall IP</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ip in ips %}
+                <tr>
+                    <td>{{ ip }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No matches found.</p>
+    {% endif %}
+</body>
+</html>

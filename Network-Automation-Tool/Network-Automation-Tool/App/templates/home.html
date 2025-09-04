@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>File Upload</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <link
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      background-image: url("https://martech.org/wp-content/uploads/2015/12/computer-network-laptops2-ss-1920.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .navbar-brand {
+      font-size: 2.0em;
+      color: #ffffff !important;
+    }
+
+    .navbar {
+      background-color: rgba(0, 123, 255, 0.9);
+    }
+
+    .container {
+      margin-top: 0px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .upload-container {
+      background-color: #fff;
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      width: 60%;
+      max-width: 500px;
+      text-align: center;
+      padding: 20px;
+      transition: background-color 0.3s ease;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .upload-container:hover {
+      background-color: #f0f0f0;
+    }
+
+    .upload-container h2 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+
+    .upload-container p {
+      margin: 10px 0;
+    }
+
+    .upload-container input[type="file"] {
+      display: none;
+    }
+
+    .upload-container label {
+      display: block;
+      cursor: pointer;
+      color: #007bff;
+      text-decoration: underline;
+    }
+
+    .upload-container .icon {
+      font-size: 2.5em;
+      color: #007bff;
+      margin-bottom: 10px;
+    }
+
+    .upload-container .file-type {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .upload-container .status {
+      color: #6c757d;
+    }
+
+    .upload-container .uploaded {
+      color: #28a745;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .upload-container .uploading {
+      color: #ffc107;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .drop-zone {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 10px;
+      text-align: center;
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    .drop-zone.hover {
+      background-color: #f0f0f0;
+    }
+
+    .file-name {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #6c757d;
+    }
+    
+    
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">Network Operations Intelligence</a>
+
+      <div class="dropdown ml-auto">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Options
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" onclick="reloadCurrentPage()">Compare</a>
+          <a class="dropdown-item" href="{% url 'home_check' %}">Generate</a>
+          <a class="dropdown-item" href="{% url 'firewall' %}">Firewall</a>
+ 
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  
+    <h1 style="color: white; text-align: center; padding: 10px 20px;font-size:1.5em; background-color: rgba(0, 0, 0, 0.7); border-radius: 5px; margin-top: 120px;">
+      Welcome! You can upload your Precheck and Postcheck output Files to generate the comparision reports - Quick report, Complete report.
+    </h1> 
+  
+  
+  <div class="upload-container">
+    <h2>COMPARE FILES</h2>
+    <p>Select the type of file you want to upload:</p>
+    <form id="uploadForm" method="POST" enctype="multipart/form-data" onsubmit="showProcessingModal(event)">
+      {% csrf_token %}
+      <div class="file-upload">
+        <input type="file" id="precheck" name="file1" onchange="handleFileUpload('status-precheck')" />
+        <label for="precheck" class="drop-zone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'precheck')">
+          <div class="icon"><i class="fa fa-file-alt"></i></div>
+          <div class="file-type">Precheck File</div>
+          <div class="status" id="status-precheck">Drag and drop the file or click</div>
+          <div class="file-name" id="filename-precheck"></div>
+        </label>
+      </div>
+      <div class="file-upload">
+        <input type="file" id="postcheck" name="file2" onchange="handleFileUpload('status-postcheck')" />
+        <label for="postcheck" class="drop-zone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'postcheck')">
+          <div class="icon"><i class="fa fa-file-alt"></i></div>
+          <div class="file-type">Postcheck File</div>
+          <div class="status" id="status-postcheck">Drag and drop the file or click</div>
+          <div class="file-name" id="filename-postcheck"></div>
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3" id="uploadButton" disabled>Compare</button>
+    </form>
+    
+  </div>
+
+  <div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-labelledby="processingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Processing...</span>
+          </div>
+          <p class="mt-3">Processing your files, please wait...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    
+    function handleFileUpload(statusId) {
+        const statusElement = document.getElementById(statusId);
+        const fileInput = document.getElementById(statusId.split('-')[1]);
+        const fileNameElement = document.getElementById(`filename-${statusId.split('-')[1]}`);
+ 
+        const file = fileInput.files[0];
+        const ext = file.name.substring(file.name.length - 4, file.name.length);
+        if (ext !== ".txt") {
+          alert(file.name+" file is not in .txt format");
+          allFilesSelected=false;
+         
+        }
+        else{
+          fileNameElement.textContent = file.name;
+ 
+          statusElement.classList.remove("uploaded");
+          statusElement.classList.add("uploading");
+          statusElement.innerHTML =
+            '<i class="fa fa-spinner fa-spin"></i> Uploading...';
+ 
+          setTimeout(() => {
+            statusElement.classList.remove("uploading");
+            statusElement.classList.add("uploaded");
+            statusElement.innerHTML =
+              '<i class="fa fa-check-circle"></i> File uploaded successfully!';
+ 
+            checkFileInputs(); // Check inputs after successful upload
+          }, 1500);
+        }
+      }
+
+    function showProcessingModal(event) {
+      event.preventDefault();
+      $('#processingModal').modal('show');
+
+      setTimeout(() => {
+
+        document.getElementById('uploadForm').reset(); // Reset form
+        document.getElementById('uploadButton').setAttribute('disabled', 'disabled'); // Disable button after form reset
+      }, 3000); // Adjust timeout as per actual processing time
+
+      setTimeout(() => {
+        event.target.submit();
+      }, 1000); // Adjust timeout as per actual processing time
+    }
+
+    function handleDragOver(event) {
+      event.preventDefault();
+      event.currentTarget.classList.add("hover");
+    }
+
+    function handleDragLeave(event) {
+      event.preventDefault();
+      event.currentTarget.classList.remove("hover");
+    }
+
+    function handleDrop(event, inputId) {
+      event.preventDefault();
+      const files = event.dataTransfer.files;
+      const fileInput = document.getElementById(inputId);
+      fileInput.files = files;
+      handleFileUpload(`status-${inputId}`);
+      event.currentTarget.classList.remove("hover");
+    }
+
+    function reloadCurrentPage() {
+      location.reload();
+    }
+
+    function checkFileInputs() {
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        let allFilesSelected = true;
+        let emptyFileDetected = false;
+   
+        fileInputs.forEach(input => {
+          const file = input.files[0];
+
+        const ext = file.name.substring(file.name.length - 4, file.name.length);
+        if (ext !== ".txt") {
+          alert(file.name+" file is not in .txt format.");
+          allFilesSelected=false;
+          
+        }
+
+            if (input.files.length === 0) {
+                allFilesSelected = false;
+            } else {
+                 // Assuming only one file is selected per input
+                if (file.size === 0) {
+                    emptyFileDetected = true;
+                }
+            }
+        });
+   
+        const uploadButton = document.getElementById('uploadButton');
+   
+        if (emptyFileDetected) {
+            alert('At least one selected file is empty.');
+            uploadButton.setAttribute('disabled', 'disabled');
+        } else if(allFilesSelected){
+               
+                // Enable the upload button if disabled
+                uploadButton.removeAttribute('disabled');
+            };
+    }
+   
+
+    document.addEventListener('DOMContentLoaded', () => {
+      checkFileInputs();
+    });
+    // function fetchCurrentContent() {
+    //   fetch('/get-current-content')
+    //     .then(response => response.text())
+    //     .then(data => {
+    //       if(data.trim()==="end"){
+    //         window.location.href="{% url 'home' %}"
+    //       }
+    //     })
+    //     .catch(error => console.error('Error fetching current content:', error));
+    // }
+    // setInterval(fetchCurrentContent, 5);
+    // $('#processingModal').on('shown.bs.modal', function () {
+    //   $('#currentContentModal').modal('show');
+    // });
+  </script>
+</body>
+</html>

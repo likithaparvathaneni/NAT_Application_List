@@ -1,0 +1,36 @@
+
+        <html>
+        <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+        h1 { margin: 15px; }
+        .add { background-color: #56E36C; }
+        .remove { background-color: #FF848A; }
+        .change { background-color: #F8D756; }
+        .command { font-weight: bold; text-align:center; background-color: #f2f2f2; }
+        th { text-align: center; }
+        td { overflow: hidden; text-overflow: ellipsis; }
+        .table-wrapper { display: block; width: 100%; }
+        .table-fixed { width: 100%; }
+        .table-fixed th, .table-fixed td { vertical-align: top; }
+        .table-fixed .command { width: 20%; }
+        .table-fixed .precheck { width: 40%; }
+        .table-fixed .postcheck { width: 40%; }
+        .command { word-wrap: break-word; }  /* Adjusted for text wrapping */
+        </style>
+        </head>
+        <body>
+        <center><h1>Device name: R1</h1>
+        <div class="table-wrapper">
+        <table class="table table-bordered table-hover table-fixed">
+        <thead class="thead-light">
+        <tr><th class="command">Command</th><th class="precheck">Precheck</th><th class="postcheck">Postcheck</th></tr>
+        </thead>
+        <tbody>
+        <tr><td class="command">show running-configuration</td><td><span class="d-block mb-2">% Invalid input detected at '^' marker.</span></td><td><span class="d-block mb-2">% Invalid input detected at '^' marker.</span></td></tr><tr><td class="command">show int desc</td><td><span class="d-block mb-2">Interface                      Status         Protocol Description</span><span class="d-block mb-2">Fa0/0                          up             up</span><span class="d-block mb-2">Gi1/0                          admin down     down</span></td><td><span class="d-block mb-2">Interface                      Status         Protocol Description</span><span class="d-block mb-2">Fa0/0                          up             up</span><span class="d-block mb-2">Gi1/0                          admin down     down</span></td></tr><tr><td class="command">show ip bgp summary</td><td><span class="d-block mb-2">% BGP not active</span></td><td><span class="d-block mb-2">% BGP not active</span></td></tr><tr><td class="command">show run | in bgp</td><td></td><td></td></tr><tr><td class="command">show ip route</td><td><span class="d-block mb-2">Codes: C - connected R - RIP M - mobile B - BGP</span><span class="d-block mb-2">D - EIGRP O - OSPF IA - OSPF inter area</span><span class="d-block mb-2">N1 - OSPF NSSA external type 1</span><span class="d-block mb-2">E1 - OSPF external type 1</span><span class="d-block mb-2">i - IS-IS L1 - IS-IS level-1 L2 - IS-IS level-2</span><span class="d-block mb-2">ia - IS-IS inter area U - per-user static route</span><span class="d-block mb-2">o - ODR</span><span class="d-block mb-2">Gateway of last resort is not set</span><span class="d-block mb-2">C    192.168.158.0/24 is directly connected</span></td><td><span class="d-block mb-2">Codes: C - connected R - RIP M - mobile B - BGP</span><span class="d-block mb-2">D - EIGRP O - OSPF IA - OSPF inter area</span><span class="d-block mb-2">N1 - OSPF NSSA external type 1</span><span class="d-block mb-2">E1 - OSPF external type 1</span><span class="d-block mb-2">i - IS-IS L1 - IS-IS level-1 L2 - IS-IS level-2</span><span class="d-block mb-2">ia - IS-IS inter area U - per-user static route</span><span class="d-block mb-2">o - ODR</span><span class="d-block mb-2">Gateway of last resort is not set</span><span class="d-block mb-2">C    192.168.158.0/24 is directly connected</span></td></tr><tr><td class="command">show ip eigrp summary</td><td><span class="d-block mb-2">% Invalid input detected at '^' marker.</span></td><td><span class="d-block mb-2">% Invalid input detected at '^' marker.</span></td></tr><tr><td class="command">show running-configuration</td><td><span class="d-block mb-2">% Invalid input detected at '^' marker.</span></td><td><span class="d-block mb-2">% Invalid input detected at '^' marker.</span></td></tr><tr><td class="command">show int desc</td><td><span class="d-block mb-2">Interface                      Status         Protocol Description</span><span class="d-block mb-2">Fa0/0                          up             up</span><span class="d-block mb-2">Gi1/0                          admin down     down</span></td><td><span class="d-block mb-2">Interface                      Status         Protocol Description</span><span class="d-block mb-2">Fa0/0                          up             up</span><span class="d-block mb-2">Gi1/0                          admin down     down</span></td></tr><tr><td class="command">show ip bgp summary</td><td><span class="d-block mb-2">% BGP not active</span></td><td><span class="d-block mb-2">% BGP not active</span></td></tr><tr><td class="command">show run | in bgp</td><td></td><td></td></tr><tr><td class="command">show ip route</td><td><span class="d-block mb-2">Codes: C - connected R - RIP M - mobile B - BGP</span><span class="d-block mb-2">D - EIGRP O - OSPF IA - OSPF inter area</span><span class="d-block mb-2">N1 - OSPF NSSA external type 1</span><span class="d-block mb-2">E1 - OSPF external type 1</span><span class="d-block mb-2">i - IS-IS L1 - IS-IS level-1 L2 - IS-IS level-2</span><span class="d-block mb-2">ia - IS-IS inter area U - per-user static route</span><span class="d-block mb-2">o - ODR</span><span class="d-block mb-2">Gateway of last resort is not set</span><span class="d-block mb-2">C    192.168.158.0/24 is directly connected</span></td><td><span class="d-block mb-2">Codes: C - connected R - RIP M - mobile B - BGP</span><span class="d-block mb-2">D - EIGRP O - OSPF IA - OSPF inter area</span><span class="d-block mb-2">N1 - OSPF NSSA external type 1</span><span class="d-block mb-2">E1 - OSPF external type 1</span><span class="d-block mb-2">i - IS-IS L1 - IS-IS level-1 L2 - IS-IS level-2</span><span class="d-block mb-2">ia - IS-IS inter area U - per-user static route</span><span class="d-block mb-2">o - ODR</span><span class="d-block mb-2">Gateway of last resort is not set</span><span class="d-block mb-2">C    192.168.158.0/24 is directly connected</span></td></tr><tr><td class="command">show ip eigrp summary</td><td><span class="d-block mb-2">% Invalid input detected at '^' marker.</span></td><td><span class="d-block mb-2">% Invalid input detected at '^' marker.</span></td></tr>
+        </tbody>
+        </table>
+        </div>
+        </body>
+        </html>
+        
